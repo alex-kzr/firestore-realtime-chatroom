@@ -35,6 +35,14 @@ class Chatroom {
                 });
         });
     }
+    updateName(username){
+        this.username = username;
+        console.log('username updated');
+    }
+    updateRoom(room){
+        this.room = room;
+        console.log('room updated');
+    }
 }
 
 const chatroom = new Chatroom('gaming', 'alex');
@@ -42,3 +50,5 @@ const chatroom = new Chatroom('gaming', 'alex');
 chatroom.getChats(data => {
     console.log(data);
 });
+
+chatroom.updateRoom('general');
