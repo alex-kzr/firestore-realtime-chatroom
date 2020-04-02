@@ -39,14 +39,11 @@ class Chatroom {
     updateName(username){
         this.username = username;
         localStorage.setItem('username', username);
-        console.log('username updated');
     }
     updateRoom(room){
         this.room = room;
         if(this.unsub){
             this.unsub;
-        }
-        
-        console.log('room updated');        
+        }        
     }
 }
