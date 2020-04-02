@@ -16,20 +16,23 @@ class Chatroom {
             message,
             username: this.username,
             room: this.room,
-            create_at: firebase.firestore.Timestamp.fromDate(now)
+            created_at: firebase.firestore.Timestamp.fromDate(now)
         };
         // save the chat document
         const response = await this.chats.add(chat);        
         return response;
     }
     getChats(callback){
-        this.chats.onSnapshot(snapshot => {
-            snapshot.docChanges().forEach(change => {
-                if(change.type === 'added'){
-                    // update ui - callback function
-                    callback(change.doc.data());
-                }
-            });
+        this.chats
+            .where('room', '==', this.room)
+            .orderBy('created_at')
+            .onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if(change.type === 'added'){
+                        // update ui - callback function
+                        callback(change.doc.data());
+                    }
+                });
         });
     }
 }
